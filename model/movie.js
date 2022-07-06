@@ -5,6 +5,7 @@ const movieSchema = new mongoose.Schema({
     overview: {type: String, required: true},
     lang: {type: String, default: "en"},
     rating: {type: Number, default: 0},
+    rated_by: [{ user_id: String, rating: Number }],
     rating_count: {type: Number, default: 0}, // required for updating rating later on
 })
 
