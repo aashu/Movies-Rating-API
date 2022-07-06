@@ -1,12 +1,16 @@
-const router = require("express").Router()
 const Movie = require("../model/movie")
 
-router.get('/', async (req, res) => {
+const getNameNRating = async (req, res) => {
+    const movie = await Movie.find({}, {title: 1, rating: 1})
+    res.send(movie)
+}
+
+const getfullMovieDetails = async (req, res) => {
     const movies = await Movie.find()
     res.status(200).send(movies)
-})
+}
 
-router.post('/rate', async(req, res) => {
+const rateMovie = async(req, res) => {
     let {rating, id} = req.body
     rating = Number(rating)
     if(rating < 0 || rating > 5) return res.status(400).send("rating should be between 0 and 5")
@@ -37,6 +41,13 @@ router.post('/rate', async(req, res) => {
         console.error(err)
     }
 
-})
+}
 
-module.exports = router
+
+
+
+module.exports = {
+    getfullMovieDetails,
+    rateMovie,
+    getNameNRating
+}

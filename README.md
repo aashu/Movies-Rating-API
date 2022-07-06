@@ -55,6 +55,6 @@ return movie names with their rating
 # TODO
 - [ ] Move docs to swagger ui
 - [ ] Add basic frontend
-- [ ] Refactor controllers
+- [x] Refactor controllers
 - [ ] Write tests
 

@@ -3,7 +3,6 @@ require("./config/db").connectDB()
 
 const auth = require("./middleware/auth")
 const express = require("express")
-const Movie = require("./model/movie")
 
 const app = express()
 
@@ -13,12 +12,9 @@ app.use(express.urlencoded({extended: true}))
 // routes
 app.use("/register", require("./routes/register"))
 app.use("/login", require("./routes/login"))
-app.use("/movies", auth, require("./routes/users"))
+app.use("/movies", auth, require("./routes/movies"))
 
-app.get('/', async (req, res) => {
-    const movie = await Movie.find({}, {title: 1, rating: 1})
-    res.send(movie)
-})
+app.get('/', require("./controllers/moviesController").getNameNRating)
 
 
 const PORT = process.env.PORT || 3000
